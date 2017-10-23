@@ -1,0 +1,19 @@
+{
+  "name": "connect-dubbo-test",
+  "version": "0.1.0",
+  "description": "node 连接 dubbo 的 dubbo 协议服务端.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "CntChen",
+  "license": "MIT",
+  "dependencies": {
+    "dubbo-registry": "^0.1.0",
+    "dubbojs-client": "git+https://github.com/dubbo-js/dubbo-client.git",
+    "js-to-java": "^2.4.0",
+    "node-zookeeper-dubbo": "^2.2.1",
+    "zookeeper-cluster-client": "^1.1.1"
+  }
+}
