@@ -1,4 +1,4 @@
-# connect-dubbo-test
+# node-connect-dubbo-test
 node 采用 dubbo 协议连接 dubbo 服务端.
 
 ## 基本步骤
@@ -19,33 +19,33 @@ node 采用 dubbo 协议连接 dubbo 服务端.
 
 ## node 调用 dubbo 服务端
 ### 原理
-[dubbo 协议][dubbo 协议]的传输协议是 TCP, 传输方式为 NIO 异步传输 (服务端实现), 默认序列化方式是 hessian2. 所以 node 客户端的通信原理就比较清晰了: node 从 zookeeper 中获取到的服务端的 ip 和 port, 发起一个 TCP 连接, 上传数据为 hessian2 编码的远程 java 方法名称和方法参数， TCP 的返回参数为 hessian2 编码的 java 方法执行结果, 解析一下就可以得到远程方法调用的结果了.
+[dubbo 协议][dubbo 协议] 的传输协议是 TCP, 传输方式为 NIO 异步传输 (服务端实现), 默认序列化方式是 hessian2. 所以 node 客户端的通信原理就比较清晰了: node 从 zookeeper 中获取到的服务端的 ip 和 port, 发起一个 TCP 连接, 上传数据为 hessian2 编码的远程 java 方法名称和方法参数， TCP 的返回参数为 hessian2 编码的 java 方法执行结果, 解析一下就可以得到远程方法调用的结果了.
 
 ### 关键点
 * TCP 连接
 
-NIO 应该是指服务端对 TCP 请求的处理, 客户端不需要维持 TCP 连接, 获取返回后就可以关闭连接. 社区的 TCP 连接库应该挺多的.
+NIO 应该是指服务端对 TCP 请求的处理, 客户端不需要维持 TCP 连接, 获取返回后就可以关闭连接. 社区的 TCP 连接库应该挺多的.
 
 * 数据格式的解析
 
-传输数据的序列化方式为 hessian2, node 端的解析和编码库为 [hessian.js][hessian.js].
+传输数据的序列化方式为 hessian2, node 端的解析和编码库为 [hessian.js][hessian.js].
 
 ### 注意点
 * 数据类型转换
 
-javascript 的数据类型没有 java 丰富, 所以 node 提交的方法参数是需要申明其对应的 java 数据类型的.
-javascript 数据在编码传输时候已经转化为 java 可解析的数据了, 所以转化的方式是由 [hessian.js][hessian.js] 实现.
+javascript 的数据类型没有 java 丰富, 所以 node 提交的方法参数是需要申明其对应的 java 数据类型的.
+javascript 数据在编码传输时候已经转化为 java 可解析的数据了, 所以转化的方式是由 [hessian.js][hessian.js] 实现.
 
 远程 java 方法的调用结果回调, 返回 node 客户端时候应该是做了默认类型转换.
 
 对 java 的 map / set / enum 等数据结构, 目前还不确定能否直接作为入参或返回.
 
-* 连续性和策略
+* 连续性和策略
   * [负载均衡](https://dubbo.gitbooks.io/dubbo-user-book/demos/loadbalance.html)，最简单就给个随机数.
   * [集群容错](https://dubbo.gitbooks.io/dubbo-user-book/demos/fault-tolerent-strategy.html) (失败重试)
   * 服务端列表缓存
 
-dubbo 提供了[多种特性](https://dubbo.gitbooks.io/dubbo-user-book/demos/)， 目前不确定哪些特性对客户端有要求, 有要求并需要该特性, 则需要 node 客户端做相应的实现.
+dubbo 提供了[多种特性](https://dubbo.gitbooks.io/dubbo-user-book/demos/)， 目前不确定哪些特性对客户端有要求, 有要求并需要该特性, 则需要 node 客户端做相应的实现.
 
 * 开发和测试
 
