@@ -121,7 +121,7 @@ $ node test-dc.js
 [node-zookeeper-client]: https://github.com/alexguan/node-zookeeper-client
 [node-zookeeper-dubbo]: https://github.com/p412726700/node-zookeeper-dubbo
 [dubbo-js]: https://github.com/dubbo-js
-[dubbo 协议]: https://dubbo.gitbooks.io/dubbo-user-book/references/protocol/dubbo.html
+[dubbo 协议]: https://dubbo.gitbooks.io/dubbo-user-book/references/protocol/dubbo.html
 [hessian.js]: https://github.com/node-modules/hessian.js
 [js-to-java]: https://github.com/node-modules/js-to-java
 
